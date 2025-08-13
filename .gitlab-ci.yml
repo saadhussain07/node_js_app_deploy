@@ -1,0 +1,12 @@
+deploy:
+  stage: deploy
+  script:
+    - echo "Current user: $(whoami)"
+    - echo "Current directory: $(pwd)"
+    - ls -la
+    - mkdir -p /www/var/html
+    - echo "Deploying to /www/var/html"
+    - rsync -av --delete --exclude='.git' --exclude='.gitlab-ci.yml' ./ /www/var/html/
+    - ls -la /www/var/html
+  only:
+    - main
