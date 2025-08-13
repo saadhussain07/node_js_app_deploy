@@ -1,7 +1,12 @@
+stages:
+  - deploy
+
 deploy:
   stage: deploy
   script:
+    - echo "Creating deployment directory if it doesn't exist"
     - mkdir -p /www/var/html
+    - echo "Deploying code to /www/var/html"
     - rsync -av --delete --exclude='.git' --exclude='.gitlab-ci.yml' ./ /www/var/html/
   only:
-    - main
+    - main  # or your branch name
