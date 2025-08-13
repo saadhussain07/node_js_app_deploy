@@ -1,0 +1,7 @@
+deploy:
+  stage: deploy
+  script:
+    - mkdir -p /www/var/html
+    - rsync -av --delete --exclude='.git' --exclude='.gitlab-ci.yml' ./ /www/var/html/
+  only:
+    - main
